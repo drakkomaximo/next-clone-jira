@@ -5,4 +5,9 @@ export interface Entry {
   status: EntryStatus;
 }
 
+export interface TableTitles {
+  title: string;
+  status: EntryStatus;
+}
+
 export type EntryStatus = "pending" | "in-progress" | "finished";
