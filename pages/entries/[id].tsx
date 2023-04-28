@@ -1,9 +1,10 @@
 import { Layout } from "@/components/layouts";
+import { FloatButton } from "@/components/ui";
 import { EntriesContext } from "@/context/entries";
 import { dbEntries } from "@/database";
 import { Entry, EntryStatus } from "@/interfaces";
 import { dateFunctions } from "@/utils";
-import { DeleteOutline, SaveOutlined } from "@mui/icons-material";
+import { SaveOutlined } from "@mui/icons-material";
 import {
   Button,
   Card,
@@ -14,7 +15,6 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
-  IconButton,
   Radio,
   RadioGroup,
   TextField,
@@ -32,7 +32,7 @@ interface EntryPageProps {
 
 const EntryPage: FC<EntryPageProps> = ({ entry }) => {
   const { updateEntry } = useContext(EntriesContext);
-  const router = useRouter()
+  const router = useRouter();
   const [description, setDescription] = useState(entry.description);
   const [status, setStatus] = useState<EntryStatus>(entry.status);
   const [touched, setTouched] = useState(false);
@@ -59,7 +59,7 @@ const EntryPage: FC<EntryPageProps> = ({ entry }) => {
       description,
     };
     updateEntry({ entryUpdated, showSnackbar: true });
-    router.push('/')
+    router.push("/");
   };
 
   return (
@@ -70,7 +70,9 @@ const EntryPage: FC<EntryPageProps> = ({ entry }) => {
             <Card>
               <CardHeader
                 title={`Entrada:`}
-                subheader={`Created ago: ${dateFunctions.getFormatDistanceToNow({ date: entry.createdAt })}`}
+                subheader={`Created ago: ${dateFunctions.getFormatDistanceToNow(
+                  { date: entry.createdAt }
+                )}`}
               />
               <CardContent>
                 <TextField
@@ -116,16 +118,7 @@ const EntryPage: FC<EntryPageProps> = ({ entry }) => {
           </Grid>
         </Grid>
 
-        <IconButton
-          sx={{
-            position: "fixed",
-            bottom: 30,
-            right: 30,
-            backgroundColor: "error.dark",
-          }}
-        >
-          <DeleteOutline />
-        </IconButton>
+        <FloatButton id={entry._id} />
       </>
     </Layout>
   );

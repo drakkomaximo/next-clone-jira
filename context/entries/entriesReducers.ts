@@ -4,7 +4,8 @@ import { EntriesState } from "./";
 type EntriesActionType =
   | { type: "[Entries] Add-Entry"; payload: Entry }
   | { type: "[Entries] Refresh-Data"; payload: Entry[] }
-  | { type: "[Entries] Updated-Entry"; payload: Entry };
+  | { type: "[Entries] Updated-Entry"; payload: Entry }
+  | { type: "[Entries] Delete-Entry"; payload: string };
 
 export const entriesReducers = (
   state: EntriesState,
@@ -27,6 +28,11 @@ export const entriesReducers = (
         entries: state.entries.map((entry) =>
           entry._id === action.payload._id ? action.payload : entry
         ),
+      };
+    case "[Entries] Delete-Entry":
+      return {
+        ...state,
+        entries: state.entries.filter((entry) => entry._id !== action.payload),
       };
 
     default:

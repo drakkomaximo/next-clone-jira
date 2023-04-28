@@ -66,6 +66,23 @@ export const EntriesProvider: FC<{ children: JSX.Element }> = ({
     }
   };
 
+  const deleteEntry = async ({ id }: { id: string }) => {
+    try {
+      await entriesApi.delete<string>(`/entries/${id}`);
+      dispatch({ type: "[Entries] Delete-Entry", payload: id });
+      enqueueSnackbar("Entry Deleted", {
+        variant: "success",
+        autoHideDuration: 1500,
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right",
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const refresfEntries = async () => {
     const { data, status } = await entriesApi.get<Entry[]>("/entries");
     if (status === 200) {
@@ -78,7 +95,9 @@ export const EntriesProvider: FC<{ children: JSX.Element }> = ({
   }, []);
 
   return (
-    <EntriesContext.Provider value={{ ...state, addEntry, updateEntry }}>
+    <EntriesContext.Provider
+      value={{ ...state, addEntry, updateEntry, deleteEntry }}
+    >
       {children}
     </EntriesContext.Provider>
   );
