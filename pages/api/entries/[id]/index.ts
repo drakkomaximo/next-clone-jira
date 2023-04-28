@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import mongoose from "mongoose";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { db } from "../../../../../database";
-import { Entry, IEntry } from "../../../../../models";
+import { db } from "@/database";
+import { Entry, IEntry } from "@/models";
 
 type Data = { message: string } | IEntry;
 
@@ -41,7 +41,7 @@ const updateEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (!entryToUpdate) {
     await db.disconnect();
     return res.status(400).json({
-      message: `No hay entrada con ese id ${id}`,
+      message: `There isn't an entry with that id: ${id}`,
     });
   }
 
@@ -75,7 +75,7 @@ const getEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
   if (!currentEntry) {
     return res.status(400).json({
-      message: `No hay entrada con ese id ${id}`,
+      message: `There isn't an entry with that id ${id}`,
     });
   }
 

@@ -11,17 +11,17 @@ interface SeedEntry {
 export const seedData : seedData = {
   entries: [
     {
-      createdAt: 1001,
+      createdAt: 1682683096395,
       description: "Descripcion 1",
       status: "pending",
     },
     {
-      createdAt: 1002,
+      createdAt: 1682683096396,
       description: "Descripcion 2",
       status: "finished",
     },
     {
-      createdAt: 1003,
+      createdAt: 1682683096397,
       description: "Descripcion 3",
       status: "in-progress",
     },

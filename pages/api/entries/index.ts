@@ -1,7 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { db } from "@/database";
+import { Entry, IEntry } from "@/models";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { db } from "../../../../database";
-import { Entry, IEntry } from "../../../../models";
+
 
 type Data = { message: string } | IEntry[] | IEntry;
 
@@ -17,7 +18,7 @@ export default function handler(
 
     default:
       return res.status(400).json({
-        message: "No existe el endpoint",
+        message: "Endpoint don't exist",
       });
   }
 }
@@ -48,6 +49,6 @@ const postEntries = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     await db.disconnect();
     res
       .status(500)
-      .json({ message: "algo salio mal, revisar consola del servidor" });
+      .json({ message: "Error, look the service console" });
   }
 };

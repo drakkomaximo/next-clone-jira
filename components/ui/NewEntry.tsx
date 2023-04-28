@@ -8,17 +8,17 @@ export const NewEntry: FC = () => {
   const { addEntry } = useContext(EntriesContext);
   const { isAdding, setIsAddingEntry } = useContext(UiContext);
 
-  const [description, setInputValue] = useState("");
+  const [description, setDescription] = useState("");
   const [isTouched, setIsTouched] = useState(false);
   const handleInputValue = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    setDescription(event.target.value);
   };
   const handleBlur = () => {
     setIsTouched(true);
   };
   const resetValues = () => {
     setIsAddingEntry({ payload: false });
-    setInputValue("");
+    setDescription("");
     setIsTouched(false);
   };
   const onSave = () => {

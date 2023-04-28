@@ -4,7 +4,7 @@ import { createContext } from "react";
 interface ContextProps {
   entries: Entry[];
   addEntry: ({ description }: { description: string }) => void;
-  updateEntry: ({ entryUpdated }: { entryUpdated: Entry }) => void;
+  updateEntry: ({ entryUpdated, showSnackbar }: { entryUpdated: Entry; showSnackbar?: boolean }) => void;
 }
 
 export const EntriesContext = createContext({} as ContextProps);
